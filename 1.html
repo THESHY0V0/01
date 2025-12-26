@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灿弘自动化有限公司 - 工业自动化解决方案专家</title>
+    <!-- 引入谷歌Material Design图标 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 引入谷歌字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* 核心样式 */
+        :root {
+            --primary-color: #1976D2; /* 谷歌蓝 */
+            --secondary-color: #424242; /* 深灰 */
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --text-color: #333333;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: #1565C0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--secondary-color);
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: #757575;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 32px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* 英雄区样式 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        /* 关于我们样式 */
+        .about {
+            background-color: var(--light-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            color: #616161;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* 业务板块样式 */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .service-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--secondary-color);
+        }
+
+        .service-card p {
+            color: #757575;
+            margin-bottom: 20px;
+        }
+
+        /* 产品展示样式 */
+        .products {
+            background-color: var(--light-gray);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .product-info p {
+            color: #757575;
+            font-size: 14px;
+        }
+
+        /* 联系我们样式 */
+        .contact {
+            background-color: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+        .contact-form {
+            background-color: var(--light-gray);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 响应式样式 */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 40px;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 0;
+                margin-bottom: 24px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                   <img src="https://i.imgs.ovh/2025/12/26/CmRbFY.png" alt="CmRbFY.png" border="0">
+                    <span>灿弘自动化</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#services">核心业务</a></li>
+                    <li><a href="#products">产品展示</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="material-icons">menu</i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>灿弘自动化 - 赋能工业自动化升级</h1>
+                <p>专注于工业自动化解决方案、智能设备研发与制造，助力企业实现高效、智能、绿色生产</p>
+                <a href="#contact" class="btn">立即咨询</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于灿弘自动化</h2>
+                <p>深耕工业自动化领域十余年，以技术创新为核心，以客户需求为导向，提供全方位的自动化解决方案</p>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1590846406792-12dd9449d916?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="灿弘自动化办公环境">
+                </div>
+                <div class="about-text">
+                    <h3>我们的企业愿景</h3>
+                    <p>灿弘自动化有限公司成立于2010年，是一家专业从事工业自动化系统集成、智能装备研发、生产和销售的高新技术企业。公司拥有一支由资深工程师和技术专家组成的研发团队，具备强大的技术研发和项目实施能力。</p>
+                    <p>我们始终坚持"技术领先、品质至上、服务第一"的经营理念，为汽车制造、电子电器、新能源、物流仓储等多个行业提供定制化的自动化解决方案，帮助客户提升生产效率，降低运营成本。</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>10+年行业经验</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>50+项技术专利</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>200+成功案例</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="material-icons">check_circle</i>
+                            <span>全国服务网络</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心业务 -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心业务</h2>
+                <p>聚焦工业自动化核心领域，提供从方案设计、产品研发到安装调试的一站式服务</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="material-icons">engineering</i>
+                    <h3>自动化生产线集成</h3>
+                    <p>根据客户需求定制各类自动化生产线，包括装配线、检测线、包装线等，实现生产过程的全自动化。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+                <div class="service-card">
+                    <i class="material-icons">robot_2</i>
+                    <h3>工业机器人应用</h3>
+                    <p>提供工业机器人选型、编程、调试及集成服务，涵盖焊接、搬运、码垛、上下料等多种应用场景。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+                <div class="service-card">
+                    <i class="material-icons">settings_sensor</i>
+                    <h3>智能控制系统</h3>
+                    <p>研发和销售PLC控制系统、SCADA监控系统、MES生产执行系统，实现生产过程的智能管控。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+                <div class="service-card">
+                    <i class="material-icons">construction</i>
+                    <h3>设备升级改造</h3>
+                    <p>为传统生产设备提供自动化、智能化升级改造服务，延长设备寿命，提升生产效率。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+                <div class="service-card">
+                    <i class="material-icons">support</i>
+                    <h3>技术咨询与服务</h3>
+                    <p>提供自动化技术咨询、人员培训、设备维护保养等专业服务，保障客户生产稳定运行。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+                <div class="service-card">
+                    <i class="material-icons">inventory_2</i>
+                    <h3>自动化配件销售</h3>
+                    <p>代理销售国内外知名品牌的传感器、变频器、伺服系统、工控机等自动化配件产品。</p>
+                    <a href="#contact" class="btn">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>产品展示</h2>
+                <p>自主研发和代理的优质自动化产品，满足不同行业的多样化需求</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1628146345363-441456162191?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="PLC控制柜">
+                    </div>
+                    <div class="product-info">
+                        <h3>PLC控制柜</h3>
+                        <p>定制化PLC控制柜，支持多种品牌PLC，适用于各类自动化控制场景</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1584464415709-915d656e98ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="工业机器人">
+                    </div>
+                    <div class="product-info">
+                        <h3>协作机器人</h3>
+                        <p>轻型协作机器人，安全高效，易于部署，适用于柔性生产场景</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1590846407504-2b797c69948f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="传感器">
+                    </div>
+                    <div class="product-info">
+                        <h3>工业传感器</h3>
+                        <p>光电、接近、压力、温度等各类工业传感器，高精度，高稳定性</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1611273482121-7fa0973f4c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="自动化流水线">
+                    </div>
+                    <div class="product-info">
+                        <h3>自动化流水线</h3>
+                        <p>定制化自动化装配流水线，可根据客户需求设计不同规格和功能</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我们</h2>
+                <p>无论您有任何问题或需求，我们都将竭诚为您提供专业的解决方案和服务</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>联系方式</h3>
+                    <div class="contact-item">
+                        <i class="material-icons">location_on</i>
+                        <div>
+                            <h4>公司地址</h4>
+                            <p>广东省深圳市宝安区沙井镇后亭全至科技园22G</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="material-icons">phone</i>
+                        <div>
+                            <h4>联系电话</h4>
+                            <p>+86 755 27399455</p>
+                          
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="material-icons">email</i>
+                        <div>
+                            <h4>电子邮箱</h4>
+                            <p>info@canhongauto.com</p>
+                            <p>sales@canhongauto.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="material-icons">access_time</i>
+                        <div>
+                            <h4>工作时间</h4>
+                            <p>周一至周六: 8:30 - 18:00</p>
+                            <p>周日: 休息</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>在线留言</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">您的姓名</label>
+                            <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">联系电话</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="请输入您的联系电话">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">电子邮箱</label>
+                            <input type="email" id="email" name="email" required placeholder="请输入您的电子邮箱">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言内容</label>
+                            <textarea id="message" name="message" required placeholder="请详细描述您的需求或问题"></textarea>
+                        </div>
+                        <button type="submit" class="btn">提交留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>	
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>关于灿弘</h3>
+                    <ul>
+                        <li><a href="#about">企业简介</a></li>
+                        <li><a href="#">发展历程</a></li>
+                        <li><a href="#">企业文化</a></li>
+                        <li><a href="#">荣誉资质</a></li>
+                        <li><a href="#">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>产品中心</h3>
+                    <ul>
+                        <li><a href="#products">PLC控制系统</a></li>
+                        <li><a href="#products">工业机器人</a></li>
+                        <li><a href="#products">传感器</a></li>
+                        <li><a href="#products">自动化流水线</a></li>
+                        <li><a href="#products">配件耗材</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>解决方案</h3>
+                    <ul>
+                        <li><a href="#services">汽车制造</a></li>
+                        <li><a href="#services">电子电器</a></li>
+                        <li><a href="#services">新能源</a></li>
+                        <li><a href="#services">物流仓储</a></li>
+                        <li><a href="#services">食品加工</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>服务支持</h3>
+                    <ul>
+                        <li><a href="#contact">联系我们</a></li>
+                        <li><a href="#">技术支持</a></li>
+                        <li><a href="#">售后服务</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">人才招聘</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 灿弘自动化有限公司 版权所有 | 苏ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 移动端点击后关闭菜单
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // 表单提交处理
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // 模拟表单提交
+            console.log('表单提交数据：', data);
+            alert('留言提交成功！我们将尽快与您联系。');
+            this.reset();
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '8px 0';
+                header.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '16px 0';
+                header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
